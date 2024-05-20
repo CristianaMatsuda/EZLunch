@@ -23,13 +23,18 @@ deactivate
 #   EXECUTANDO MIGRATIONS
 #   https://docs.djangoproject.com/en/5.0/intro/tutorial02/
 #
-#   REMEMBER THE THREE-STEP GUIDE TO MAKING MODEL CHANGES:
-#   Change your models (in models.py).
-#   Run python manage.py makemigrations to create migrations for those changes
-#   Run python manage.py migrate to apply those changes to the database.
+REMEMBER THE THREE-STEP GUIDE TO MAKING MODEL CHANGES:
+
+Change your models (in models.py).
+
+Run python manage.py makemigrations to create migrations for those changes
+
+Run python manage.py migrate to apply those changes to the database.
 
 py manage.py makemigrations <appName>
+
 py manage.py sqlmigrate <appName> 0001
+
 py manage.py migrate
 
 
