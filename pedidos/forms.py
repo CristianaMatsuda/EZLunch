@@ -21,6 +21,7 @@ class MarmitaForm(forms.Form):
     EXTRAS = get_choices(Conteudo.objects.filter(categoria__descricao__iexact='extra'))
     marmita_tipo = forms.ChoiceField(choices=TAMANHOS)
     item_quantidade = forms.IntegerField()
+    pedido_distancia = forms.DecimalField(decimal_places=2)
     marmita_base1 = forms.ChoiceField(choices=BASES)
     marmita_base2 = forms.ChoiceField(choices=BASES, required=False)
     marmita_carne1 = forms.ChoiceField(choices=CARNES)

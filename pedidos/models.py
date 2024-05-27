@@ -41,6 +41,7 @@ class Pedido(models.Model):
         ('C', 'CANCELADO')
     ]
     cliente = models.ForeignKey(User, on_delete=models.CASCADE)
+    distancia = models.DecimalField(max_digits=10, decimal_places=2)
     vl_frete = models.DecimalField(max_digits=10, decimal_places=2)
     vl_pedido = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=1, choices=STATUS, default='P')
