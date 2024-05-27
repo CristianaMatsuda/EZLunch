@@ -6,6 +6,7 @@
               <th>ID do Pedido</th>
               <th>Data de inclusão</th>
               <th>Status</th>
+              <th>Distancia</th>
               <th>Valor do Pedido</th>
               <th>Valor do Frete</th>
               <th>VALOR TOTAL</th>
@@ -14,6 +15,7 @@
                 <td>{{pedido.id}}</td>
                 <td>{{pedido.data_inclusao}}</td>
                 <td>{{pedido.get_status_display}}</td>
+                <td>{{pedido.distancia}}</td>
                 <td>{{pedido.vl_pedido}}</td>
                 <td>{{pedido.vl_frete}}</td>
                 <td>{% with total=pedido.vl_pedido|add:pedido.vl_frete %}
@@ -61,11 +63,13 @@
           <th>ID do Pedido</th>
           <th>Data de inclusão</th>
           <th>Status</th>
+          <th>Distancia</th>
           <th>Valor do Pedido</th>
           <th>Valor do Frete</th>
           <th>VALOR TOTAL</th>
         </tr>
         <tr>
+            <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
