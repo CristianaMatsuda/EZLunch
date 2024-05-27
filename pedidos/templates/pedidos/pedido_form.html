@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Pedido</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const formsetContainer = document.getElementById('formset-container');
+            const addButton = document.getElementById('add-marmita');
+
+            addButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                const totalForms = document.getElementById('id_form-TOTAL_FORMS');
+                const formIndex = totalForms.value;
+                const newForm = formsetContainer.children[0].cloneNode(true);
+                const regex = new RegExp(`form-(\\d+)-`, 'g');
+
+                newForm.innerHTML = newForm.innerHTML.replace(regex, `form-${parseInt(formIndex, 10)}-`);
+                formsetContainer.appendChild(newForm);
+
+                totalForms.value = parseInt(formIndex) + 1;
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Criar Pedido</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div id="formset-container">
+            {{ formset.management_form }}
+            {% for form in formset %}
+                <div class="form-item">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        <button id="add-marmita">Adicionar Marmita</button>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

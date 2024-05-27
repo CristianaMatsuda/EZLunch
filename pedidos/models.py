@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Categoria(models.Model):
     descricao = models.CharField(max_length=100)
@@ -23,27 +24,33 @@ class Marmita(models.Model):
     ]
 
     tamanho = models.CharField(max_length=1, choices=TAMANHOS)
-    base1 = models.ForeignKey(Conteudo, on_delete=models.CASCADE)
-    base2 = models.ForeignKey(Conteudo, on_delete=models.CASCADE, blank=True)
-    carne1 = models.ForeignKey(Conteudo, on_delete=models.CASCADE)
-    carne2 = models.ForeignKey(Conteudo, on_delete=models.CASCADE, blank=True)
-    salada = models.ForeignKey(Conteudo, on_delete=models.CASCADE)
-    extra = models.ForeignKey(Conteudo, on_delete=models.CASCADE, blank=True)
+    base1 = models.ForeignKey(Conteudo, related_name='base1', on_delete=models.CASCADE)
+    base2 = models.ForeignKey(Conteudo, related_name='base2', on_delete=models.CASCADE, blank=True, null=True)
+    carne1 = models.ForeignKey(Conteudo, related_name='carne1', on_delete=models.CASCADE)
+    carne2 = models.ForeignKey(Conteudo, related_name='carne2', on_delete=models.CASCADE, blank=True, null=True)
+    salada = models.ForeignKey(Conteudo, related_name='salada', on_delete=models.CASCADE)
+    extra = models.ForeignKey(Conteudo, related_name='extra', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return f"Marmita {self.get_tamanho_display()}"
+        return f"{self.get_tamanho_display()}"
 
 class Pedido(models.Model):
+    STATUS = [
+        ('P', 'PENDENTE'),
+        ('E', 'ENTREGUE'),
+        ('C', 'CANCELADO')
+    ]
+    cliente = models.ForeignKey(User, on_delete=models.CASCADE)
     vl_frete = models.DecimalField(max_digits=10, decimal_places=2)
     vl_pedido = models.DecimalField(max_digits=10, decimal_places=2)
-    # Mudar para cliente
-    cliente = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=1, choices=STATUS, default='P')
+    data_inclusao = models.DateTimeField("Data Inclusão", default=timezone.now)
 
     def __str__(self):
-        return self.id
+        return f"Pedido {self.id} - Cliente {self.cliente.username}"
 
 class Item(models.Model):
-    quantidade = models.IntegerField
+    quantidade = models.IntegerField()
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     marmita = models.ForeignKey(Marmita, on_delete=models.CASCADE)
 
