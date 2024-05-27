@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% if itens %}
+        <h1>Detalhes do Pedido {{ pedido.id }}</h1>
+    {% else %}
+        <p>No Pedido are available.</p>
+    {% endif %}
+</head>
+<body>
+    {% if itens %}
+        {% for item in itens %}
+            <h2>Detalhes do Item</h2>
+
+            <table>
+                <tr>
+                    <th>ID do Item</th>
+                    <td>{{ item.id }}</td>
+                </tr>
+                <tr>
+                    <th>Quantidade</th>
+                    <td>{{ item.quantidade }}</td>
+                </tr>
+                <tr>
+                    <th>ID do Pedido</th>
+                    <td>{{ item.pedido.id }}</td>
+                </tr>
+                <tr>
+                    <th>Tamanho da Marmita</th>
+                    <td>{{ item.marmita.get_tamanho_display }}</td>
+                </tr>
+            </table>
+
+            <h3>Detalhes da Marmita</h3>
+            <table>
+                <tr>
+                    <th>Base 1</th>
+                    <td>{{ item.marmita.base1.descricao }}</td>
+                </tr>
+                {% if item.marmita.base2 %}
+                <tr>
+                    <th>Base 2</th>
+                    <td>{{ item.marmita.base2.descricao }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Carne 1</th>
+                    <td>{{ item.marmita.carne1.descricao }}</td>
+                </tr>
+                {% if item.marmita.carne2 %}
+                <tr>
+                    <th>Carne 2</th>
+                    <td>{{ item.marmita.carne2.descricao }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Salada</th>
+                    <td>{{ item.marmita.salada.descricao }}</td>
+                </tr>
+                {% if item.marmita.extra %}
+                <tr>
+                    <th>Extra</th>
+                    <td>{{ item.marmita.extra.descricao }}</td>
+                </tr>
+                {% endif %}
+            </table>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

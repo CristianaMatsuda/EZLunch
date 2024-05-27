@@ -3,5 +3,7 @@ from . import views
 
 app_name = "pedidos"
 urlpatterns = [
-    path("", views.index, name="index"), # Ex: /pedidos/
+    path("", views.IndexView.as_view(), name="index"),
+    path("<int:pk>/", views.DetailView.as_view(), name="detail"),
+    path("novo/", views.incluir_pedido, name="novo-pedido")
 ]

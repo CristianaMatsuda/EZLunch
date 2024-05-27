@@ -17,6 +17,8 @@ py -m django --version
 
 py -m pip install "colorama >= 0.4.6"
 
+python -m pip install django-debug-toolbar
+
 # Para desativar o venv usar:
 deactivate
 
