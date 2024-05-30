@@ -36,6 +36,7 @@ class Marmita(models.Model):
 
 class Pedido(models.Model):
     STATUS = [
+        ('A', 'ABERTO'),
         ('P', 'PENDENTE'),
         ('E', 'ENTREGUE'),
         ('C', 'CANCELADO')
@@ -44,8 +45,9 @@ class Pedido(models.Model):
     distancia = models.DecimalField(max_digits=10, decimal_places=2)
     vl_frete = models.DecimalField(max_digits=10, decimal_places=2)
     vl_pedido = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=1, choices=STATUS, default='P')
+    status = models.CharField(max_length=1, choices=STATUS, default='A')
     data_inclusao = models.DateTimeField("Data Inclusão", default=timezone.now)
+    data_cancelado = models.DateTimeField("Data Cancelamento", blank=True, null=True)
 
     def __str__(self):
         return f"Pedido {self.id} - Cliente {self.cliente.username}"

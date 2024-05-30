@@ -1,4 +1,5 @@
-from .models import Marmita
+from django.shortcuts import get_object_or_404
+from .models import Marmita, Conteudo
 
 class MarmitaBuilder:
     def __init__(self):
@@ -15,6 +16,9 @@ class MarmitaBuilder:
         return self
 
     def adiciona_base(self, base):
+        # Busca a instancia do Conteudo de acordo com o que foi selecionado
+        base = get_object_or_404(Conteudo, pk=base)
+
         if self.base1 is None:
             self.base1 = base
         elif self.base2 is None:
@@ -24,6 +28,9 @@ class MarmitaBuilder:
         return self
 
     def adiciona_carne(self, carne):
+        # Busca a instancia do Conteudo de acordo com o que foi selecionado
+        carne = get_object_or_404(Conteudo, pk=carne)
+
         if self.carne1 is None:
             self.carne1 = carne
         elif self.carne2 is None:
@@ -33,10 +40,16 @@ class MarmitaBuilder:
         return self
 
     def adiciona_salada(self, salada):
+        # Busca a instancia do Conteudo de acordo com o que foi selecionado
+        salada = get_object_or_404(Conteudo, pk=salada)
+
         self.salada = salada
         return self
 
     def adiciona_extra(self, extra):
+        # Busca a instancia do Conteudo de acordo com o que foi selecionado
+        extra = get_object_or_404(Conteudo, pk=extra)
+
         self.extra = extra
         return self
 

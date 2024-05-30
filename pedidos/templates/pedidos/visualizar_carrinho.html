@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Seu Carrinho</title>
+</head>
+<body>
+    {% if itens %}
+        {% if itens %}
+            <h1>Seu Carrinho</h1>
+            <ul>
+                {% for item in itens %}
+                    <h2>Marmita {{ forloop.counter }}</h2>
+                    <table>
+                        <tr>
+                            <th>Quantidade</th>
+                            <td>{{ item.quantidade }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tamanho da Marmita</th>
+                            <td>{{ item.marmita.get_tamanho_display }}</td>
+                        </tr>
+                        <tr>
+                            <th>Base 1</th>
+                            <td>{{ item.marmita.base1.descricao }}</td>
+                        </tr>
+                        {% if item.marmita.base2 %}
+                        <tr>
+                            <th>Base 2</th>
+                            <td>{{ item.marmita.base2.descricao }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Carne 1</th>
+                            <td>{{ item.marmita.carne1.descricao }}</td>
+                        </tr>
+                        {% if item.marmita.carne2 %}
+                        <tr>
+                            <th>Carne 2</th>
+                            <td>{{ item.marmita.carne2.descricao }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Salada</th>
+                            <td>{{ item.marmita.salada.descricao }}</td>
+                        </tr>
+                        {% if item.marmita.extra %}
+                        <tr>
+                            <th>Extra</th>
+                            <td>{{ item.marmita.extra.descricao }}</td>
+                        </tr>
+                        {% endif %}
+                    </table>
+
+                    <form method="post" action="{% url 'pedidos:remover-marmita' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Remover Marmita</button>
+                    </form>
+                {% endfor %}
+            </ul>
+                <a href="{% url 'pedidos:adicionar-marmita' %}">Adicionar Outra Marmita</a>
+                <form method="post" action="{% url 'pedidos:fechar-pedido' %}">
+                {% csrf_token %}
+                <button type="submit">Fechar Pedido</button>
+            </form>
+        {% else %}
+            <p>Carrinho vazio</p>
+            <a href="{% url 'pedidos:adicionar-marmita' %}">Adicionar Marmita ao carrinho</a>
+            {% endif %}
+    {% else %}
+        <p>Você não tem nenhum pedido em aberto</p>
+        <a href="{% url 'pedidos:adicionar-marmita' %}">Adicionar Marmita ao carrinho</a>
+    {% endif %}
+</body>
+</html>

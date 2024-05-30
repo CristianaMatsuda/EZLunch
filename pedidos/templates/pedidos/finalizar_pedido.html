@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Finalizar Pedido</title>
+</head>
+<body>
+    <h1>Finalizar Pedido</h1>
+
+    {% if pedido %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Finalizar Pedido</button>
+        </form>
+        <a href="{% url 'pedidos:visualizar-carrinho' %}">Voltar ao Carrinho</a>
+    {% else %}
+        <p>Você não tem nenhum pedido em aberto</p>
+        <a href="{% url 'pedidos:adicionar-marmita' %}">Adicionar Marmita ao carrinho</a>
+    {% endif %}
+</body>
+</html>
+

@@ -1,44 +1,43 @@
 {% if latest_pedido_list %}
     <ul>
-    {% for pedido in latest_pedido_list %}
-        <table>
-            <tr>
-              <th>ID do Pedido</th>
-              <th>Data de inclusão</th>
-              <th>Status</th>
-              <th>Distancia</th>
-              <th>Valor do Pedido</th>
-              <th>Valor do Frete</th>
-              <th>VALOR TOTAL</th>
-            </tr>
-            <tr>
-                <td>{{pedido.id}}</td>
-                <td>{{pedido.data_inclusao}}</td>
-                <td>{{pedido.get_status_display}}</td>
-                <td>{{pedido.distancia}}</td>
-                <td>{{pedido.vl_pedido}}</td>
-                <td>{{pedido.vl_frete}}</td>
-                <td>{% with total=pedido.vl_pedido|add:pedido.vl_frete %}
-                        {{ total }}
-                    {% endwith %}
-                </td>
-            </tr>
-        </table>
-        {% comment %} <table>
-            <tr>
-                <th>Quantidade</th>
-                <th>Tamanho</th>
-            </tr>
-            {% for item in pedido.item_set.all %}
-            <tr>
-                <td>{{ item.quantidade }}</td>
-                <td>{{ item.marmita.get_tamanho_display }}</td>
-            </tr>
-            {% endfor %}
-        </table> {% endcomment %}
-        {% comment %} <li><a href="{% url 'Pedido:detail' pedido.id %}">{{ pedido.pedido_text }}</a></li> {% endcomment %}
-    {% endfor %}
+        {% for pedido in latest_pedido_list %}
+            <table>
+                <tr>
+                <th>ID do Pedido</th>
+                <th>Data de inclusão</th>
+                <th>Status</th>
+                <th>Distancia</th>
+                <th>Valor do Pedido</th>
+                <th>Valor do Frete</th>
+                <th>VALOR TOTAL</th>
+                </tr>
+                <tr>
+                    <td>{{pedido.id}}</td>
+                    <td>{{pedido.data_inclusao}}</td>
+                    <td>{{pedido.get_status_display}}</td>
+                    <td>{{pedido.distancia}}</td>
+                    <td>{{pedido.vl_pedido}}</td>
+                    <td>{{pedido.vl_frete}}</td>
+                    <td>{% with total=pedido.vl_pedido|add:pedido.vl_frete %}
+                            {{ total }}
+                        {% endwith %}
+                    </td>
+                    <td>
+                        <a href="{% url 'pedidos:detail' pedido.id %}">Detalhes do pedido</a>
+                    </td>
+                    {% if pedido.status == 'P' %}
+                        <td>
+                            <form method="post" action="{% url 'pedidos:cancelar-pedido' pedido.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" onclick="return confirm('Tem certeza de que deseja cancelar este pedido?');">Cancelar Pedido</button>
+                            </form>
+                        </td>
+                    {% endif %}
+                </tr>
+            </table>
+        {% endfor %}
     </ul>
+    <a href="{% url 'pedidos:adicionar-marmita' %}">Novo Pedido</a>
     {% comment %} <div class="pagination">
         <span class="step-links">
             {% if latest_pedido_list.has_previous %}
