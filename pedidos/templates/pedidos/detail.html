@@ -10,29 +10,17 @@
 <body>
     {% if itens %}
         {% for item in itens %}
-            <h2>Detalhes do Item</h2>
+            <h2>Detalhes da Marmita</h2>
 
             <table>
-                <tr>
-                    <th>ID do Item</th>
-                    <td>{{ item.id }}</td>
-                </tr>
                 <tr>
                     <th>Quantidade</th>
                     <td>{{ item.quantidade }}</td>
                 </tr>
                 <tr>
-                    <th>ID do Pedido</th>
-                    <td>{{ item.pedido.id }}</td>
-                </tr>
-                <tr>
                     <th>Tamanho da Marmita</th>
                     <td>{{ item.marmita.get_tamanho_display }}</td>
                 </tr>
-            </table>
-
-            <h3>Detalhes da Marmita</h3>
-            <table>
                 <tr>
                     <th>Base 1</th>
                     <td>{{ item.marmita.base1.descricao }}</td>
@@ -66,5 +54,6 @@
             </table>
         {% endfor %}
     {% endif %}
+    <a href="{% url 'pedidos:index' %}">Retornar</a>
 </body>
 </html>

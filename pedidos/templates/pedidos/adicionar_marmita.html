@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Marmita</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const marmitaTipoField = document.getElementById('id_marmita_tipo');
+            const base1Field = document.getElementById('id_marmita_base1').closest('p');
+            const base2Field = document.getElementById('id_marmita_base2').closest('p');
+            const carne1Field = document.getElementById('id_marmita_carne1').closest('p');
+            const carne2Field = document.getElementById('id_marmita_carne2').closest('p');
+            const saladaField = document.getElementById('id_marmita_salada').closest('p');
+            const extraField = document.getElementById('id_marmita_extra').closest('p');
+
+            const fields = [base1Field, base2Field, carne1Field, carne2Field, saladaField, extraField];
+
+            function hideAllFields() {
+                fields.forEach(field => field.style.display = 'none');
+            }
+
+            function showFieldsForTipo(tipo) {
+                hideAllFields();
+                if (tipo === 'P') {
+                    base1Field.style.display = 'block';
+                    base2Field.style.display = 'block';
+                    carne1Field.style.display = 'block';
+                    saladaField.style.display = 'block';
+                } else if (tipo === 'M') {
+                    base1Field.style.display = 'block';
+                    base2Field.style.display = 'block';
+                    carne1Field.style.display = 'block';
+                    carne2Field.style.display = 'block';
+                    saladaField.style.display = 'block';
+                } else if (tipo === 'G') {
+                    base1Field.style.display = 'block';
+                    base2Field.style.display = 'block';
+                    carne1Field.style.display = 'block';
+                    carne2Field.style.display = 'block';
+                    saladaField.style.display = 'block';
+                    extraField.style.display = 'block';
+                }
+            }
+
+            marmitaTipoField.addEventListener('change', function () {
+                showFieldsForTipo(this.value);
+            });
+
+            hideAllFields();
+        });
+    </script>
+</head>
+<body>
+    <h1>Adicionar Marmita ao Carrinho</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>{{ form.marmita_tipo.label_tag }} {{ form.marmita_tipo }}</p>
+        <p>{{ form.item_quantidade.label_tag }} {{ form.item_quantidade }}</p>
+        <p>{{ form.marmita_base1.label_tag }} {{ form.marmita_base1 }}</p>
+        <p>{{ form.marmita_base2.label_tag }} {{ form.marmita_base2 }}</p>
+        <p>{{ form.marmita_carne1.label_tag }} {{ form.marmita_carne1 }}</p>
+        <p>{{ form.marmita_carne2.label_tag }} {{ form.marmita_carne2 }}</p>
+        <p>{{ form.marmita_salada.label_tag }} {{ form.marmita_salada }}</p>
+        <p>{{ form.marmita_extra.label_tag }} {{ form.marmita_extra }}</p>
+        <button type="submit">Adicionar ao Carrinho</button>
+    </form>
+    <a href="{% url 'pedidos:visualizar-carrinho' %}">Visualizar Carrinho</a>
+</body>
+</html>

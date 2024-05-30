@@ -4,24 +4,27 @@ from .models import Conteudo
 
 class MarmitaForm(forms.Form):
     TAMANHOS = [
+        (None, ''),
         ('P', 'Pequena'),
         ('M', 'Média'),
         ('G', 'Grande')
     ]
 
+    # Gera lista de tuplas das possíveis escolhas para cada Categoria
     def get_choices(queryset):
         choices = [(None, '')]
         for item in queryset:
             choices.append((item.id, item.descricao))
         return choices
 
+    # Busca apenas os conteudos para cada Categoria (usa o iexact para ser case insensitive)
     BASES = get_choices(Conteudo.objects.filter(categoria__descricao__iexact='base'))
     CARNES = get_choices(Conteudo.objects.filter(categoria__descricao__iexact='carne'))
     SALADAS = get_choices(Conteudo.objects.filter(categoria__descricao__iexact='salada'))
     EXTRAS = get_choices(Conteudo.objects.filter(categoria__descricao__iexact='extra'))
+
     marmita_tipo = forms.ChoiceField(choices=TAMANHOS)
     item_quantidade = forms.IntegerField()
-    pedido_distancia = forms.DecimalField(decimal_places=2)
     marmita_base1 = forms.ChoiceField(choices=BASES)
     marmita_base2 = forms.ChoiceField(choices=BASES, required=False)
     marmita_carne1 = forms.ChoiceField(choices=CARNES)
@@ -29,4 +32,5 @@ class MarmitaForm(forms.Form):
     marmita_salada = forms.ChoiceField(choices=SALADAS)
     marmita_extra = forms.ChoiceField(choices=EXTRAS, required=False)
 
-MarmitaFormSet = forms.formset_factory(MarmitaForm, extra=2)
+class FinalizarPedidoForm(forms.Form):
+    distancia = forms.DecimalField(max_digits=5, decimal_places=2, label="Distância em km")
