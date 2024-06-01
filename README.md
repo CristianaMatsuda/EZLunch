@@ -17,7 +17,14 @@ py -m django --version
 
 py -m pip install "colorama >= 0.4.6"
 
-python -m pip install django-debug-toolbar
+py -m pip install django-debug-toolbar
+
+py -m pip install django-axes
+
+py -m pip install django-dirtyfields
+
+py -m pip install python-decouple
+
 
 # Para desativar o venv usar:
 deactivate
@@ -45,3 +52,6 @@ py manage.py migrate
 #   https://docs.djangoproject.com/en/5.0/intro/tutorial01/
 #
 py manage.py runserver
+
+# Axes (resetar usuario)
+py manage.py axes_reset
