@@ -25,6 +25,7 @@ py -m pip install django-dirtyfields
 
 py -m pip install python-decouple
 
+py -m pip install django-ipware
 
 # Para desativar o venv usar:
 deactivate
