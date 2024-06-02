@@ -7,17 +7,21 @@
 <body>
     <h1>Finalizar Pedido</h1>
 
+    {% include "pedidos/messages.html" %}
+
     {% if pedido %}
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Finalizar Pedido</button>
         </form>
-        <a href="{% url 'pedidos:visualizar-carrinho' %}">Voltar ao Carrinho</a>
+        <p><a href="{% url 'pedidos:visualizar-carrinho' %}">Voltar ao Carrinho</a></p>
     {% else %}
         <p>Você não tem nenhum pedido em aberto</p>
-        <a href="{% url 'pedidos:adicionar-marmita' %}">Adicionar Marmita ao carrinho</a>
+        <p><a href="{% url 'pedidos:adicionar-marmita' %}">Adicionar Marmita ao carrinho</a></p>
     {% endif %}
+
+    <p><a href="{% url 'pedidos:index' %}">Retornar para a Home</a></p>
 </body>
 </html>
 

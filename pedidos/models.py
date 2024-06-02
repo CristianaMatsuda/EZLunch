@@ -16,15 +16,16 @@ class Conteudo(models.Model):
     def __str__(self):
         return self.descricao
 
+class Tamanho(models.Model):
+    codigo = models.CharField(max_length=1, primary_key=True)
+    descricao = models.CharField(max_length=100)
+    preco = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.descricao
 
 class Marmita(models.Model):
-    TAMANHOS = [
-        ('P', 'Pequena'),
-        ('M', 'Média'),
-        ('G', 'Grande')
-    ]
-
-    tamanho = models.CharField(max_length=1, choices=TAMANHOS)
+    tamanho = models.ForeignKey(Tamanho, on_delete=models.CASCADE)
     base1 = models.ForeignKey(Conteudo, related_name='base1', on_delete=models.CASCADE)
     base2 = models.ForeignKey(Conteudo, related_name='base2', on_delete=models.CASCADE, blank=True, null=True)
     carne1 = models.ForeignKey(Conteudo, related_name='carne1', on_delete=models.CASCADE)

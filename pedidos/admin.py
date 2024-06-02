@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Categoria, Conteudo, Marmita, Item, Pedido
+from .models import Categoria, Conteudo, Marmita, Item, Pedido, Tamanho
 # Mostra os logs no admin mas nao tem filtro por data e queria fazer algumas modificaoes na visualizacao
 # from django.contrib.admin.models import LogEntry
 # admin.site.register(LogEntry)
@@ -33,3 +33,4 @@ admin.site.register(Conteudo)
 admin.site.register(Marmita)
 admin.site.register(Item)
 admin.site.register(Pedido)
+admin.site.register(Tamanho)

@@ -1,4 +1,14 @@
-{% if latest_pedido_list %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home</h1>
+
+    {% include "pedidos/messages.html" %}
+
+    {% if latest_pedido_list %}
     <ul>
         {% for pedido in latest_pedido_list %}
             <table>
@@ -19,11 +29,15 @@
                     <td>{{pedido.vl_pedido}}</td>
                     <td>{{pedido.vl_frete}}</td>
                     <td>{% with total=pedido.vl_pedido|add:pedido.vl_frete %}
-                            {{ total }}
+                            {{ total|floatformat:2 }}
                         {% endwith %}
                     </td>
                     <td>
-                        <a href="{% url 'pedidos:detail' pedido.id %}">Detalhes do pedido</a>
+                        {% if pedido.status == 'A'%}
+                            <a href="{% url 'pedidos:visualizar-carrinho' %}">Detalhes do pedido</a>
+                        {% else %}
+                            <a href="{% url 'pedidos:detail' pedido.id %}">Detalhes do pedido</a>
+                        {% endif %}
                     </td>
                     {% if pedido.status == 'P' %}
                         <td>
@@ -37,44 +51,10 @@
             </table>
         {% endfor %}
     </ul>
+    {% else %}
+        <p>Nenhum pedido cadastrado</p>
+    {% endif %}
+
     <a href="{% url 'pedidos:adicionar-marmita' %}">Novo Pedido</a>
-    {% comment %} <div class="pagination">
-        <span class="step-links">
-            {% if latest_pedido_list.has_previous %}
-                <a href="?page=1">&laquo; primeiro</a>
-                <a href="?page={{ latest_pedido_list.previous_page_number }}">anterior</a>
-            {% endif %}
-
-            <span class="current">
-                Página {{ latest_pedido_list.number }} de {{ latest_pedido_list.paginator.num_pages }}.
-            </span>
-
-            {% if latest_pedido_list.has_next %}
-                <a href="?page={{ latest_pedido_list.next_page_number }}">próximo</a>
-                <a href="?page={{ latest_pedido_list.paginator.num_pages }}">último &raquo;</a>
-            {% endif %}
-        </span>
-    </div> {% endcomment %}
-{% else %}
-    <p>No Pedido are available.</p>
-    <table>
-        <tr>
-          <th>ID do Pedido</th>
-          <th>Data de inclusão</th>
-          <th>Status</th>
-          <th>Distancia</th>
-          <th>Valor do Pedido</th>
-          <th>Valor do Frete</th>
-          <th>VALOR TOTAL</th>
-        </tr>
-        <tr>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-    </table>
-{% endif %}
+</body>
+</html>
