@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from dirtyfields import DirtyFieldsMixin
 
 class Categoria(models.Model):
     descricao = models.CharField(max_length=100)
@@ -34,7 +35,7 @@ class Marmita(models.Model):
     def __str__(self):
         return f"{self.get_tamanho_display()}"
 
-class Pedido(models.Model):
+class Pedido(DirtyFieldsMixin, models.Model):
     STATUS = [
         ('A', 'ABERTO'),
         ('P', 'PENDENTE'),
