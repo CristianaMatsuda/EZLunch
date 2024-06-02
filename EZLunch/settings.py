@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'frete.apps.FreteConfig',
+    'logs.apps.LogsConfig',
     'pedidos.apps.PedidosConfig',
     'usuarios.apps.UsuariosConfig',
     'debug_toolbar',
@@ -54,8 +54,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'axes.middleware.AxesMiddleware',
+    'logs.middleware.ThreadLocalMiddleware',
+    # 'ipware.middleware.trusted_ips.XForwardedForMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
