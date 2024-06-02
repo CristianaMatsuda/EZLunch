@@ -1,14 +1,8 @@
 from django import forms
 
-from .models import Conteudo
+from .models import Conteudo, Tamanho
 
 class MarmitaForm(forms.Form):
-    TAMANHOS = [
-        (None, ''),
-        ('P', 'Pequena'),
-        ('M', 'Média'),
-        ('G', 'Grande')
-    ]
 
     # Gera lista de tuplas das possíveis escolhas para cada Categoria
     def get_choices(queryset):
@@ -23,7 +17,8 @@ class MarmitaForm(forms.Form):
     SALADAS = get_choices(Conteudo.objects.filter(categoria__descricao__iexact='salada'))
     EXTRAS = get_choices(Conteudo.objects.filter(categoria__descricao__iexact='extra'))
 
-    marmita_tipo = forms.ChoiceField(choices=TAMANHOS)
+    # Busca todas as opcoes de tamanho na tabela para exibir para o usuario escolher
+    marmita_tipo = forms.ModelChoiceField(queryset=Tamanho.objects.all(), empty_label="")
     item_quantidade = forms.IntegerField()
     marmita_base1 = forms.ChoiceField(choices=BASES)
     marmita_base2 = forms.ChoiceField(choices=BASES, required=False)

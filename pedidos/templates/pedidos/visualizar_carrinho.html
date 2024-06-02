@@ -5,9 +5,12 @@
     <title>Seu Carrinho</title>
 </head>
 <body>
+    <h1>Seu Carrinho</h1>
+
+    {% include "pedidos/messages.html" %}
+
     {% if itens %}
         {% if itens %}
-            <h1>Seu Carrinho</h1>
             <ul>
                 {% for item in itens %}
                     <h2>Marmita {{ forloop.counter }}</h2>
@@ -18,7 +21,7 @@
                         </tr>
                         <tr>
                             <th>Tamanho da Marmita</th>
-                            <td>{{ item.marmita.get_tamanho_display }}</td>
+                            <td>{{ item.marmita.tamanho.descricao }}</td>
                         </tr>
                         <tr>
                             <th>Base 1</th>
@@ -71,5 +74,7 @@
         <p>Você não tem nenhum pedido em aberto</p>
         <a href="{% url 'pedidos:adicionar-marmita' %}">Adicionar Marmita ao carrinho</a>
     {% endif %}
+
+    <a href="{% url 'pedidos:index' %}">Retornar para a Home</a>
 </body>
 </html>

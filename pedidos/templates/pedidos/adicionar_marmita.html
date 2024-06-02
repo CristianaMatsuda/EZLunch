@@ -52,6 +52,9 @@
 </head>
 <body>
     <h1>Adicionar Marmita ao Carrinho</h1>
+
+    {% include "pedidos/messages.html" %}
+
     <form method="post">
         {% csrf_token %}
         <p>{{ form.marmita_tipo.label_tag }} {{ form.marmita_tipo }}</p>
@@ -64,6 +67,7 @@
         <p>{{ form.marmita_extra.label_tag }} {{ form.marmita_extra }}</p>
         <button type="submit">Adicionar ao Carrinho</button>
     </form>
-    <a href="{% url 'pedidos:visualizar-carrinho' %}">Visualizar Carrinho</a>
+    <p><a href="{% url 'pedidos:visualizar-carrinho' %}">Visualizar Carrinho</a></p>
+    <p><a href="{% url 'pedidos:index' %}">Retornar para a Home</a></p>
 </body>
 </html>
