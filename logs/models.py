@@ -18,7 +18,6 @@ class ActionLog(DirtyFieldsMixin, models.Model):
     ip_address = models.GenericIPAddressField()
     old_values = models.TextField(blank=True, null=True)
     new_values = models.TextField(blank=True, null=True)
-    # request = None
 
     def __str__(self):
         return f"User: {self.user.username} | Operação: {self.get_action_display()} | Registro: {self.model} {self.object_id}"

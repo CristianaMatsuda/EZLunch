@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'axes',
     'dirtyfields',
+    'rangefilter',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,7 +58,6 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'axes.middleware.AxesMiddleware',
     'logs.middleware.ThreadLocalMiddleware',
-    # 'ipware.middleware.trusted_ips.XForwardedForMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -143,9 +143,9 @@ INTERNAL_IPS = [
 ]
 
 # Redirecionamento para as paginas de login
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'login'
-LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'pedidos:index'
+LOGOUT_REDIRECT_URL = 'usuarios:login'
+LOGIN_URL = 'usuarios:login'
 
 # Configuracoes do axes
 AXES_FAILURE_LIMIT: 5

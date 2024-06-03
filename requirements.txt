@@ -1,0 +1,8 @@
+colorama==0.4.6
+Django==5.0.6
+django-admin-rangefilter==0.13.0
+django-axes==6.4.0
+django-debug-toolbar==4.4.1
+django-dirtyfields==1.9.3
+django-ipware==7.0.1
+python-decouple==3.8

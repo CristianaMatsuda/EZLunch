@@ -11,21 +11,7 @@ EZLunch\Scripts\activate.bat
 
 py -m pip install --upgrade pip
 
-py -m pip install Django
-
-py -m django --version
-
-py -m pip install "colorama >= 0.4.6"
-
-py -m pip install django-debug-toolbar
-
-py -m pip install django-axes
-
-py -m pip install django-dirtyfields
-
-py -m pip install python-decouple
-
-py -m pip install django-ipware
+pip install -r requirements.txt
 
 # Para desativar o venv usar:
 deactivate
@@ -56,3 +42,22 @@ py manage.py runserver
 
 # Axes (resetar usuario)
 py manage.py axes_reset
+
+
+# Alterar models do axes
+class AccessLog(AccessBase):
+    logout_time = models.DateTimeField(_("Logout Time"), null=True, blank=True)
+
+    def __str__(self):
+        return f"Access Log for {self.username} @ {self.attempt_time}"
+
+    @property
+    def uptime(self):
+        from datetime import timedelta
+        if self.logout_time:
+            return self.logout_time - self.attempt_time
+        return timedelta(0)
+
+    class Meta:
+        verbose_name = _("access log")
+        verbose_name_plural = _("access logs")
