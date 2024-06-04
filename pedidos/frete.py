@@ -10,14 +10,14 @@ class Frete:
 class FreteAte2Km(Frete):
     def handle(self, distancia):
         if 0 <= distancia <= 2:
-            return 5 * distancia
+            return 2 * distancia
         else:
             return super().handle(distancia)
 
 class FreteAte5Km(Frete):
     def handle(self, distancia):
         if 2 < distancia <= 5:
-            return 10 * distancia
+            return 2.5 * distancia
         else:
             return super().handle(distancia)
 

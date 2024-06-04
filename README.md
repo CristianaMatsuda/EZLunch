@@ -11,6 +11,8 @@ EZLunch\Scripts\activate.bat
 
 py -m pip install --upgrade pip
 
+cd EZLunch
+
 pip install -r requirements.txt
 
 # Para desativar o venv usar:
