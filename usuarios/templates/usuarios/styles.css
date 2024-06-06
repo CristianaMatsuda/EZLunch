@@ -6,13 +6,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>Logout</title>
-</head>
+
 <body style="background: linear-gradient( 169deg, #fff 3.66%, #fbebea 29.71%,#fbebea 73.03%, #f0b6a7 98.43% ); min-height: 97dvh; justify-content: center; display: flex; align-items: center; font-family: Montserrat, sans-serif;">
     <section style="background-color: #fff; max-width: 300px; border-radius: 10px; display: flex; flex-direction: column; gap: 25px; padding: 25px; margin: 0 auto; justify-content: center; align-items: center;">
         <h1 style="color: #f0b6a7; margin: 0; font-size: 28px; font-family: Carter One, system-ui;">EZLunch</h1>
-        <h2 style="color: #333; margin: 0; font-size: 20px;">Você foi desconectado!!</h2>
-        <a style="align-items: center; background-color: #fff; border: 1px solid #f0b6a7; border-radius: 5px; color: #f0b6a7; cursor: pointer; display: flex; font-size: 16px; justify-content: center; text-decoration: none; height: 40px; width: 305px;" href="{% url 'usuarios:login' %}">Entrar novamente</a>
-    </section>
-</body>
-</html>
+
+
+h2 
+
+style="color: #333; margin: 0; font-size: 20px;"
+
+form     
+
+style="display: flex; flex-direction: column; align-items: center; color: #333; font-size: 18px; gap: 15px;"
+
+input
+
+style="background-color: #fbebea; border: none; border-radius: 5px; color: #333; font-size: 16px; height: 50px; outline: none; margin: 0 auto; padding-left: 15px; width: 290px;"
+
+button
+
+style="background-color: #f0b6a7; color: #fff; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; height: 40px; width: 305px;"
+
+p
+
+style="color: #333; font-size: 18px; margin: 0 auto;"
+
+a
+
+style="align-items: center; background-color: #fff; border: 1px solid #f0b6a7; border-radius: 5px; color: #f0b6a7; cursor: pointer; display: flex; font-size: 16px; justify-content: center; text-decoration: none; height: 40px; width: 305px;"
+
