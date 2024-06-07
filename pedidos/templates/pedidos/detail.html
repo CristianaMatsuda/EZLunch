@@ -1,59 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    {% if itens %}
-        <h1>Detalhes do Pedido {{ pedido.id }}</h1>
-    {% else %}
-        <p>No Pedido are available.</p>
-    {% endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
 </head>
-<body>
-    {% if itens %}
-        {% for item in itens %}
-            <h2>Detalhes da Marmita</h2>
 
-            <table>
-                <tr>
-                    <th>Quantidade</th>
-                    <td>{{ item.quantidade }}</td>
-                </tr>
-                <tr>
-                    <th>Tamanho da Marmita</th>
-                    <td>{{ item.marmita.tamanho.descricao }}</td>
-                </tr>
-                <tr>
-                    <th>Base 1</th>
-                    <td>{{ item.marmita.base1.descricao }}</td>
-                </tr>
+<body style="background: linear-gradient( 169deg, #fff 3.66%, #fbebea 29.71%,#fbebea 73.03%, #f0b6a7 98.43% ); min-height: 97dvh; justify-content: center; display: flex; align-items: center; font-family: Montserrat, sans-serif;">
+    {% if itens %}
+
+    <section style="background-color: #fff; max-width: 300px; border-radius: 10px; display: flex; flex-direction: column; gap: 25px; padding: 25px; margin: 0 auto; justify-content: center; align-items: center; color: #000;">
+        <h1 style="color: #f0b6a7; margin: 0; font-size: 28px; font-family: Carter One, system-ui;">EZLunch</h1>
+
+        {% for item in itens %}
+
+            {% if itens %}
+                <h2 style="color: #333; margin: 0; font-size: 20px;">Detalhes do pedido</h2>
+            {% else %}
+                <p>No Pedido are available.</p>
+            {% endif %}
+    
+            <ul style="display: flex; flex-direction: column; gap: 5px; list-style-type: none; margin: 0; padding: 0; width: 245px;">
+                <li style="display: flex; justify-content: space-between;">
+                    <span>Quantidade</span>
+                    <span style="text-align: left;">{{ item.quantidade }}</span>
+                </li>
+                <li style="display: flex; justify-content: space-between;">
+                    <span>Tamanho</span>
+                    <span style="text-align: left;">{{ item.marmita.tamanho.descricao }}</span>
+                </li>
+                <li style="display: flex; justify-content: space-between;">
+                    <span>Base 1</span>
+                    <span style="text-align: left;">{{ item.marmita.base1.descricao }}</span>
+                </li>
                 {% if item.marmita.base2 %}
-                <tr>
-                    <th>Base 2</th>
-                    <td>{{ item.marmita.base2.descricao }}</td>
-                </tr>
+                <li style="display: flex; justify-content: space-between;">
+                    <span>Base 2</span>
+                    <span style="text-align: left;">{{ item.marmita.base2.descricao }}</span>
+                </li>
                 {% endif %}
-                <tr>
-                    <th>Carne 1</th>
-                    <td>{{ item.marmita.carne1.descricao }}</td>
-                </tr>
+                <li style="display: flex; justify-content: space-between;">
+                    <span>Carne 1</span>
+                    <span style="text-align: left;">{{ item.marmita.carne1.descricao }}</span>
+                </li>
                 {% if item.marmita.carne2 %}
-                <tr>
-                    <th>Carne 2</th>
-                    <td>{{ item.marmita.carne2.descricao }}</td>
-                </tr>
+                <li style="display: flex; justify-content: space-between;">
+                    <span>Carne 2</span>
+                    <span style="text-align: left;">{{ item.marmita.carne2.descricao }}</span>
+                </li>
                 {% endif %}
-                <tr>
-                    <th>Salada</th>
-                    <td>{{ item.marmita.salada.descricao }}</td>
-                </tr>
+                <li style="display: flex; justify-content: space-between;">
+                    <span>Salada</span>
+                    <span style="text-align: left;">{{ item.marmita.salada.descricao }}</span>
+                </li>
                 {% if item.marmita.extra %}
-                <tr>
-                    <th>Extra</th>
-                    <td>{{ item.marmita.extra.descricao }}</td>
-                </tr>
+                <li style="display: flex; justify-content: space-between;">
+                    <span>Extra</span>
+                    <span style="text-align: left;">{{ item.marmita.extra.descricao }}</span>
+                </li>
                 {% endif %}
-            </table>
+            </ul>
+            
         {% endfor %}
+
+        <a style="align-items: center; background-color: #fff; border: 1px solid #f0b6a7; border-radius: 5px; color: #f0b6a7; cursor: pointer; display: flex; font-size: 16px; justify-content: center; text-decoration: none; height: 40px; width: 305px; margin-top: 25px;" href="{% url 'pedidos:index' %}">Retornar</a>
+    </section>
+
     {% endif %}
-    <a href="{% url 'pedidos:index' %}">Retornar</a>
 </body>
 </html>

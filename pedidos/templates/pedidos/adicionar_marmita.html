@@ -22,23 +22,23 @@
             function showFieldsForTipo(tipo) {
                 hideAllFields();
                 if (tipo === 'P') {
-                    base1Field.style.display = 'block';
-                    base2Field.style.display = 'block';
-                    carne1Field.style.display = 'block';
-                    saladaField.style.display = 'block';
+                    base1Field.style.display = 'flex';
+                    base2Field.style.display = 'flex';
+                    carne1Field.style.display = 'flex';
+                    saladaField.style.display = 'flex';
                 } else if (tipo === 'M') {
-                    base1Field.style.display = 'block';
-                    base2Field.style.display = 'block';
-                    carne1Field.style.display = 'block';
-                    carne2Field.style.display = 'block';
-                    saladaField.style.display = 'block';
+                    base1Field.style.display = 'flex';
+                    base2Field.style.display = 'flex';
+                    carne1Field.style.display = 'flex';
+                    carne2Field.style.display = 'flex';
+                    saladaField.style.display = 'flex';
                 } else if (tipo === 'G') {
-                    base1Field.style.display = 'block';
-                    base2Field.style.display = 'block';
-                    carne1Field.style.display = 'block';
-                    carne2Field.style.display = 'block';
-                    saladaField.style.display = 'block';
-                    extraField.style.display = 'block';
+                    base1Field.style.display = 'flex';
+                    base2Field.style.display = 'flex';
+                    carne1Field.style.display = 'flex';
+                    carne2Field.style.display = 'flex';
+                    saladaField.style.display = 'flex';
+                    extraField.style.display = 'flex';
                 }
             }
 
@@ -50,24 +50,31 @@
         });
     </script>
 </head>
-<body>
-    <h1>Adicionar Marmita ao Carrinho</h1>
+<body style="background: linear-gradient( 169deg, #fff 3.66%, #fbebea 29.71%,#fbebea 73.03%, #f0b6a7 98.43% ); min-height: 97dvh; justify-content: center; display: flex; align-items: center; font-family: Montserrat, sans-serif; color: #000;">
+    <section style="background-color: #fff; max-width: 300px; border-radius: 10px; display: flex; flex-direction: column; gap: 25px; padding: 25px; margin: 0 auto; justify-content: center; align-items: center;">
+        <h1 style="color: #f0b6a7; margin: 0; font-size: 28px; font-family: Carter One, system-ui;">EZLunch</h1>
+        <h2>Adicionar Marmita ao Carrinho</h2>
 
-    {% include "pedidos/messages.html" %}
+        {% include "pedidos/messages.html" %}
 
-    <form method="post">
-        {% csrf_token %}
-        <p>{{ form.marmita_tipo.label_tag }} {{ form.marmita_tipo }}</p>
-        <p>{{ form.item_quantidade.label_tag }} {{ form.item_quantidade }}</p>
-        <p>{{ form.marmita_base1.label_tag }} {{ form.marmita_base1 }}</p>
-        <p>{{ form.marmita_base2.label_tag }} {{ form.marmita_base2 }}</p>
-        <p>{{ form.marmita_carne1.label_tag }} {{ form.marmita_carne1 }}</p>
-        <p>{{ form.marmita_carne2.label_tag }} {{ form.marmita_carne2 }}</p>
-        <p>{{ form.marmita_salada.label_tag }} {{ form.marmita_salada }}</p>
-        <p>{{ form.marmita_extra.label_tag }} {{ form.marmita_extra }}</p>
-        <button type="submit">Adicionar ao Carrinho</button>
-    </form>
-    <p><a href="{% url 'pedidos:visualizar-carrinho' %}">Visualizar Carrinho</a></p>
-    <p><a href="{% url 'pedidos:index' %}">Retornar para a Home</a></p>
+        <form method="post">
+            {% csrf_token %}
+            <ul style="display: flex; flex-direction: column; gap: 10px; list-style-type: none; margin: 0; padding: 0;">
+                <p style="margin: 0;" >{{ form.marmita_tipo.label_tag }} {{ form.marmita_tipo }}</p>
+                <p style="margin: 0;" >{{ form.item_quantidade.label_tag }} {{ form.item_quantidade }}</p>
+                <p style="margin: 0;" >{{ form.marmita_base1.label_tag }} {{ form.marmita_base1 }}</p>
+                <p style="margin: 0;" >{{ form.marmita_base2.label_tag }} {{ form.marmita_base2 }}</p>
+                <p style="margin: 0;" >{{ form.marmita_carne1.label_tag }} {{ form.marmita_carne1 }}</p>
+                <p style="margin: 0;" >{{ form.marmita_carne2.label_tag }} {{ form.marmita_carne2 }}</p>
+                <p style="margin: 0;" >{{ form.marmita_salada.label_tag }} {{ form.marmita_salada }}</p>
+                <p style="margin: 0;" >{{ form.marmita_extra.label_tag }} {{ form.marmita_extra }}</p>
+            <button style="background-color: #f0b6a7; color: #fff; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; height: 40px; width: 305px;" type="submit">Adicionar ao Carrinho</button>
+            </ul>
+        </form>
+        <a style="align-items: center; background-color: #fff; border: 1px solid #f0b6a7; border-radius: 5px; color: #f0b6a7; cursor: pointer; display: flex; font-size: 16px; justify-content: center; text-decoration: none; height: 40px; width: 305px;"
+        href="{% url 'pedidos:visualizar-carrinho' %}">Visualizar Carrinho</a>
+        <a style="align-items: center; background-color: #fff; border: 1px solid #f0b6a7; border-radius: 5px; color: #f0b6a7; cursor: pointer; display: flex; font-size: 16px; justify-content: center; text-decoration: none; height: 40px; width: 305px;"
+        href="{% url 'pedidos:index' %}">Retornar para a Home</a>
+    </section>
 </body>
 </html>

@@ -1,60 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Home</title>
-</head>
-<body>
-    <h1>Home</h1>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
 
-    {% include "pedidos/messages.html" %}
+    <body style="background: linear-gradient( 169deg, #fff 3.66%, #fbebea 29.71%,#fbebea 73.03%, #f0b6a7 98.43% ); min-height: 97dvh; justify-content: center; display: flex; align-items: center; font-family: Montserrat, sans-serif;">
+        <section style="background-color: #fff; max-width: 300px; border-radius: 10px; display: flex; flex-direction: column; gap: 25px; padding: 25px; margin: 0 auto; justify-content: center; align-items: center; color: #000;">
+            <h1 style="color: #f0b6a7; margin: 0; font-size: 28px; font-family: Carter One, system-ui;">EZLunch</h1>
+            {% include "pedidos/messages.html" %}
+            {% if latest_pedido_list %}
+            <div style="display: flex; flex-direction: column; gap: 25px;">
+                {% for pedido in latest_pedido_list %}
+                    <ul style="display: flex; flex-direction: column; gap: 5px; list-style-type: none; margin: 0; padding: 0;">
+                        <li style="display: flex; justify-content: space-between;">
+                            <span>ID do Pedido</span>
+                            <span style="text-align: left;">{{pedido.id}}</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between;">
+                            <span>Data de inclusão</span>
+                            <span style="text-align: left;">{{pedido.data_inclusao}}</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between;"> 
+                            <span>Status</span>
+                            <span style="text-align: left;">{{pedido.get_status_display}}</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between;"> 
+                            <span>Distancia</span>
+                            <span style="text-align: left;">{{pedido.distancia}}</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between;"> 
+                            <span>Valor do Pedido</span>
+                            <span style="text-align: left;">{{pedido.vl_pedido}}</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between;"> 
+                            <span>Valor do Frete</span>
+                            <span style="text-align: left;">{{pedido.vl_frete}}</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between;">
+                            <span>VALOR TOTAL</span>                        
+                            <span style="text-align: left;">
+                                {% with total=pedido.vl_pedido|add:pedido.vl_frete %}
+                                    {{ total|floatformat:2 }}
+                                {% endwith %}
+                            </span>
+                        </li>
+                        <li>
+                            {% if pedido.status == 'A'%}
+                                <a style="align-items: center; background-color: #fff; border: 1px solid #f0b6a7; border-radius: 5px; color: #f0b6a7; cursor: pointer; display: flex; font-size: 16px; justify-content: center; text-decoration: none; height: 40px; width: 305px; margin-top: 5px;"
+                                href="{% url 'pedidos:visualizar-carrinho' %}">Detalhes do pedido</a>
+                            {% else %}
+                                <a style="align-items: center; background-color: #fff; border: 1px solid #f0b6a7; border-radius: 5px; color: #f0b6a7; cursor: pointer; display: flex; font-size: 16px; justify-content: center; text-decoration: none; height: 40px; width: 305px; margin-top: 5px;"
+                                href="{% url 'pedidos:detail' pedido.id %}">Detalhes do pedido</a>
+                            {% endif %}
+                        </li>
 
-    {% if latest_pedido_list %}
-    <ul>
-        {% for pedido in latest_pedido_list %}
-            <table>
-                <tr>
-                <th>ID do Pedido</th>
-                <th>Data de inclusão</th>
-                <th>Status</th>
-                <th>Distancia</th>
-                <th>Valor do Pedido</th>
-                <th>Valor do Frete</th>
-                <th>VALOR TOTAL</th>
-                </tr>
-                <tr>
-                    <td>{{pedido.id}}</td>
-                    <td>{{pedido.data_inclusao}}</td>
-                    <td>{{pedido.get_status_display}}</td>
-                    <td>{{pedido.distancia}}</td>
-                    <td>{{pedido.vl_pedido}}</td>
-                    <td>{{pedido.vl_frete}}</td>
-                    <td>{% with total=pedido.vl_pedido|add:pedido.vl_frete %}
-                            {{ total|floatformat:2 }}
-                        {% endwith %}
-                    </td>
-                    <td>
-                        {% if pedido.status == 'A'%}
-                            <a href="{% url 'pedidos:visualizar-carrinho' %}">Detalhes do pedido</a>
-                        {% else %}
-                            <a href="{% url 'pedidos:detail' pedido.id %}">Detalhes do pedido</a>
-                        {% endif %}
-                    </td>
-                    {% if pedido.status == 'P' %}
-                        <td>
-                            <form method="post" action="{% url 'pedidos:cancelar-pedido' pedido.id %}" style="display:inline;">
+                        {% if pedido.status == 'P' %}
+
+                        <li>
+                            <form meliod="post" action="{% url 'pedidos:cancelar-pedido' pedido.id %}" style="display:inline;">
                                 {% csrf_token %}
-                                <button type="submit" onclick="return confirm('Tem certeza de que deseja cancelar este pedido?');">Cancelar Pedido</button>
+                                <button style="background-color: #f0b6a7; color: #fff; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; height: 40px; width: 305px;"style="background-color: #f0b6a7; color: #fff; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; height: 40px; width: 305px;" type="submit" onclick="return confirm('Tem certeza de que deseja cancelar este pedido?');">Cancelar Pedido</button>
                             </form>
-                        </td>
-                    {% endif %}
-                </tr>
-            </table>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <p>Nenhum pedido cadastrado</p>
-    {% endif %}
+                        </li>
 
-    <a href="{% url 'pedidos:adicionar-marmita' %}">Novo Pedido</a>
-</body>
+                        {% endif %}
+                    </ul>
+                {% endfor %}
+            </div>
+            {% else %}
+                <p>Nenhum pedido cadastrado</p>
+            {% endif %}
+
+            <div style="margin: 0; padding: 0;">
+                <a style="align-items: center; background-color: #fff; border: 1px solid #f0b6a7; border-radius: 5px; color: #f0b6a7; cursor: pointer; display: flex; font-size: 16px; justify-content: center; text-decoration: none; height: 40px; width: 305px; margin-top: 25px;" href="{% url 'pedidos:adicionar-marmita' %}">Novo Pedido</a>
+                <a style="align-items: center; background-color: #f0b6a7; border: 1px solid #f0b6a7; border-radius: 5px; color: #fff; cursor: pointer; display: flex; font-size: 16px; justify-content: center; text-decoration: none; height: 40px; width: 305px; margin-top: 10px;" href="{% url 'usuarios:logout' %}">Sair</a>
+            </div>
+        </section>
+    </body>
 </html>
