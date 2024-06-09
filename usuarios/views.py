@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from .forms import LoginForm, RegisterForm
 from .singleton import UserAuthSingleton
+from django.contrib import messages
 
 def login_view(request):
     if request.method == 'POST':
@@ -13,7 +14,7 @@ def login_view(request):
             if user_auth.login_user(request, username, password):
                 return redirect('pedidos:index')
             else:
-                form.add_error(None, "Usuário ou senha inválidos")
+                messages.error(request, "Usuário ou senha inválidos")
     else:
         form = LoginForm()
     return render(request, 'usuarios/login.html', {'form': form})

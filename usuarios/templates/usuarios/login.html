@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    
+
     <title>EZLunch</title>
 </head>
 
@@ -14,6 +14,7 @@
     <section style="background-color: #fff; max-width: 300px; border-radius: 10px; display: flex; flex-direction: column; gap: 25px; padding: 25px; margin: 0 auto; justify-content: center; align-items: center;">
         <h1 style="color: #f0b6a7; margin: 0; font-size: 28px; font-family: Carter One, system-ui;">EZLunch</h1>
         <form method="post" style="display: flex; flex-direction: column; align-items: center; color: #333; font-size: 18px; gap: 15px;">
+            {% include "pedidos/messages.html" %}
             {% csrf_token %}
             <div style="margin: 0;" >
                 <input style="background-color: #fbebea; border: none; border-radius: 5px; color: #333; font-size: 16px; height: 50px; outline: none; margin: 0 auto; padding-left: 15px; width: 290px;" type="text" name="username" maxlength="150" required id="id_username" placeholder="Usuário">
